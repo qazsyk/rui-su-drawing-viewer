@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>睿速图纸查看器</title>
+    <script type="module" crossorigin src="/assets/index-uxHIn9hR.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-g4k1fXu2.css">
+  </head>
+  <body>
+    <div class="app" data-phase="empty" data-mode="none">
+      <header class="topbar">
+        <div class="title-block">
+          <strong>睿速图纸查看器</strong>
+          <span id="file-name">未打开文件</span>
+        </div>
+        <div class="topbar-actions">
+          <div class="theme-switch" role="group" aria-label="外观主题">
+            <button type="button" data-appearance="dark" class="theme-chip">深色</button>
+            <button type="button" data-appearance="light" class="theme-chip">浅色</button>
+          </div>
+          <button id="about-button" type="button">关于</button>
+        </div>
+      </header>
+
+      <div class="stage">
+        <main id="viewer" class="viewport viewport-3d">
+          <div id="empty" class="empty">
+            <p class="empty-title">打开图纸</p>
+            <p class="empty-copy">三维：STL、glTF、OBJ、STEP、IGES、IFC…　二维：DWG、DXF。单指旋转/平移，双指缩放。</p>
+            <button id="open-empty" type="button" class="primary">选择文件</button>
+            <div class="empty-actions">
+              <button id="sample-empty" type="button" class="ghost">示例立方体</button>
+              <button id="sample-dxf-empty" type="button" class="ghost">示例平面图</button>
+            </div>
+            <p class="empty-brands">睿行智车 · 速羽动力</p>
+          </div>
+          <div id="measure-hint" class="measure-hint" hidden>测距：点选模型上两点</div>
+        </main>
+
+        <div id="cad2d" class="viewport viewport-2d" hidden>
+          <canvas id="cad2d-canvas"></canvas>
+        </div>
+      </div>
+
+      <div id="view-tools" class="view-tools" hidden>
+        <div class="tools-3d">
+          <button type="button" data-view="iso" disabled>等轴</button>
+          <button type="button" data-view="front" disabled>前</button>
+          <button type="button" data-view="back" disabled>后</button>
+          <button type="button" data-view="left" disabled>左</button>
+          <button type="button" data-view="right" disabled>右</button>
+          <button type="button" data-view="top" disabled>顶</button>
+          <button type="button" data-view="bottom" disabled>底</button>
+          <button id="reset-view-button" type="button" disabled>复位</button>
+          <button id="measure-button" type="button" disabled>测距</button>
+          <button id="xray-button" type="button" disabled>透视</button>
+          <button id="explode-button" type="button" disabled>爆炸</button>
+          <button id="clip-button" type="button" disabled>剖切</button>
+          <button id="env-button" type="button" disabled>环境</button>
+          <button id="shot-button" type="button" disabled>截图</button>
+          <button id="meshes-button" type="button" disabled>网格</button>
+          <button id="info-button" type="button" disabled>信息</button>
+        </div>
+        <div class="tools-2d" hidden>
+          <button id="cad-fit-button" type="button" disabled>适配</button>
+          <button id="cad-pan-button" type="button" disabled>平移</button>
+          <button id="cad-measure-button" type="button" disabled>测距</button>
+          <button id="cad-layers-button" type="button" disabled>图层</button>
+          <button id="cad-shot-button" type="button" disabled>截图</button>
+        </div>
+      </div>
+
+      <div id="tool-panel" class="tool-panel" hidden>
+        <label id="explode-control" class="tool-control" hidden>
+          <span>爆炸程度</span>
+          <input id="explode-slider" type="range" min="0" max="100" value="0" />
+        </label>
+        <label id="clip-control" class="tool-control" hidden>
+          <span>剖切位置</span>
+          <input id="clip-slider" type="range" min="0" max="100" value="50" />
+        </label>
+        <div id="clip-axis" class="clip-axis" hidden>
+          <button type="button" data-clip-axis="x">X</button>
+          <button type="button" data-clip-axis="y" class="is-active">Y</button>
+          <button type="button" data-clip-axis="z">Z</button>
+        </div>
+      </div>
+
+      <p id="status" class="status" role="status"></p>
+
+      <nav class="toolbar">
+        <button id="open-button" type="button">打开</button>
+        <button id="sample-button" type="button">示例3D</button>
+        <button id="sample-dxf-button" type="button">示例2D</button>
+        <button id="fit-button" type="button" disabled>适配</button>
+        <button id="edge-button" type="button" disabled>边线</button>
+        <button id="projection-button" type="button" disabled>正交</button>
+      </nav>
+    </div>
+
+    <input id="file-input" type="file" multiple accept=".dwg,.dxf,.stp,.step,.stl,.obj,.gltf,.glb,.iges,.igs,.ifc,.3mf,.fbx,.3dm,.ply" hidden />
+
+    <dialog id="about-dialog">
+      <h2>睿速图纸查看器</h2>
+      <p class="about-lead">睿行智车与速羽动力共用的离线图纸查看工具（三维 + 二维）。</p>
+
+      <section class="brand-card" data-brand="ruixing">
+        <img src="/brand/ruimove-logo.svg" alt="睿行智车 RUIMOVE" class="brand-logo" />
+        <div>
+          <h3>睿行智车 · RUIMOVE</h3>
+          <p>车规级标准化通用底盘与低速无人车。</p>
+          <a href="https://www.ruimove.com/" target="_blank" rel="noopener noreferrer">www.ruimove.com</a>
+        </div>
+      </section>
+
+      <section class="brand-card" data-brand="suyu">
+        <img src="/brand/arrowy-logo.png" alt="速羽动力 ARROWY RACING" class="brand-logo brand-logo--wide" />
+        <div>
+          <h3>速羽动力 · ARROWY RACING</h3>
+          <p>卡丁车整车、赛道方案与赛事装备。</p>
+          <a href="https://www.arrowyracing.com/" target="_blank" rel="noopener noreferrer">www.arrowyracing.com</a>
+        </div>
+      </section>
+
+      <p class="about-engine">三维：Online 3D Viewer 0.18.0（MIT）。STEP / IGES 由 OpenCascade，IFC 由 web-ifc，3DM 由 rhino3dm，压缩网格由 Draco 解析。</p>
+      <p class="about-engine">二维：@cadview/core（MIT）显示 DXF；DWG 经 @cadview/dwg + LibreDWG WASM 在本地转成 DXF 再显示（GPL-3.0，仅自用）。不需要联网。</p>
+
+      <form method="dialog">
+        <button type="submit">关闭</button>
+      </form>
+    </dialog>
+
+    <dialog id="meshes-dialog">
+      <h2>网格列表</h2>
+      <div id="meshes-list" class="meshes-list"></div>
+      <form method="dialog">
+        <button type="submit">关闭</button>
+      </form>
+    </dialog>
+
+    <dialog id="layers-dialog">
+      <h2>图层</h2>
+      <div id="layers-list" class="meshes-list"></div>
+      <form method="dialog">
+        <button type="submit">关闭</button>
+      </form>
+    </dialog>
+
+    <dialog id="info-dialog">
+      <h2>模型信息</h2>
+      <dl id="info-list" class="info-list"></dl>
+      <form method="dialog">
+        <button type="submit">关闭</button>
+      </form>
+    </dialog>
+
+    <script src="/o3dv.min.js"></script>
+  </body>
+</html>
