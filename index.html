@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#0b1220" />
     <title>睿速图纸查看器</title>
-    <script type="module" crossorigin src="/assets/index-uxHIn9hR.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-g4k1fXu2.css">
+    <script type="module" crossorigin src="/rui-su-drawing-viewer/assets/index-COVK2-ku.js"></script>
+    <link rel="stylesheet" crossorigin href="/rui-su-drawing-viewer/assets/index-g4k1fXu2.css">
   </head>
   <body>
     <div class="app" data-phase="empty" data-mode="none">
@@ -107,7 +107,7 @@
       <p class="about-lead">睿行智车与速羽动力共用的离线图纸查看工具（三维 + 二维）。</p>
 
       <section class="brand-card" data-brand="ruixing">
-        <img src="/brand/ruimove-logo.svg" alt="睿行智车 RUIMOVE" class="brand-logo" />
+        <img src="/rui-su-drawing-viewer/brand/ruimove-logo.svg" alt="睿行智车 RUIMOVE" class="brand-logo" />
         <div>
           <h3>睿行智车 · RUIMOVE</h3>
           <p>车规级标准化通用底盘与低速无人车。</p>
@@ -116,7 +116,7 @@
       </section>
 
       <section class="brand-card" data-brand="suyu">
-        <img src="/brand/arrowy-logo.png" alt="速羽动力 ARROWY RACING" class="brand-logo brand-logo--wide" />
+        <img src="/rui-su-drawing-viewer/brand/arrowy-logo.png" alt="速羽动力 ARROWY RACING" class="brand-logo brand-logo--wide" />
         <div>
           <h3>速羽动力 · ARROWY RACING</h3>
           <p>卡丁车整车、赛道方案与赛事装备。</p>
@@ -156,6 +156,14 @@
       </form>
     </dialog>
 
-    <script src="/o3dv.min.js"></script>
+    <script>
+      window.__VIEWER_BASE__ = (function () {
+        var path = location.pathname || '/';
+        if (path.endsWith('/')) return path;
+        var i = path.lastIndexOf('/');
+        return i >= 0 ? path.slice(0, i + 1) : '/';
+      })();
+    </script>
+    <script src="./o3dv.min.js"></script>
   </body>
 </html>
