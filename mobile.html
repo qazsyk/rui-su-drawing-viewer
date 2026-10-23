@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>下载手机端 · 睿速图纸查看器</title>
+    <style>
+      :root {
+        --bg0: #0b1220;
+        --card: #121c2e;
+        --line: #243552;
+        --text: #e8eef8;
+        --muted: #8fa6c4;
+        --accent: #3d7aef;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(900px 420px at 10% -10%, rgba(61, 122, 239, 0.28), transparent 60%),
+          radial-gradient(700px 380px at 95% 0%, rgba(34, 197, 94, 0.12), transparent 55%),
+          linear-gradient(180deg, var(--bg0), #070b14 72%);
+      }
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 28px 20px 48px;
+      }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+      .nav a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .nav a:hover { color: var(--text); }
+      .brand {
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 28px;
+        line-height: 1.25;
+      }
+      .lead {
+        margin: 0 0 20px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.65;
+      }
+      .panel {
+        background: color-mix(in srgb, var(--card) 92%, transparent);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px;
+        margin-bottom: 14px;
+      }
+      .panel h2 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+      .panel p {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 9px;
+      }
+      li {
+        display: grid;
+        grid-template-columns: 10px 1fr;
+        gap: 10px;
+        align-items: start;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      li::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        margin-top: 6px;
+        border-radius: 50%;
+        background: #22c55e;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.16);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 650;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-ghost {
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: transparent;
+      }
+      .meta {
+        margin-top: 12px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .url {
+        margin-top: 10px;
+        word-break: break-all;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px;
+        color: #cbd5e1;
+        background: rgba(0, 0, 0, 0.28);
+        border-radius: 8px;
+        padding: 8px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="nav">
+        <a href="./">← 返回网页版查看器</a>
+        <span style="color: var(--muted); font-size: 12px;">v0.1.0</span>
+      </div>
+
+      <div class="brand">睿行智车 · 速羽动力</div>
+      <h1>下载手机端 App</h1>
+      <p class="lead">
+        「睿速图纸查看器」安卓版可在手机上离线打开三维模型与 DWG/DXF 平面图，适合现场核对。请先阅读功能说明，再下载安装。
+      </p>
+
+      <section class="panel">
+        <h2>手机端能做什么</h2>
+        <ul>
+          <li>打开三维模型：STL、glTF/GLB、OBJ、STEP、IGES、IFC 等</li>
+          <li>打开二维图纸：DWG、DXF（本机文件即可）</li>
+          <li>交互：单指旋转/平移、双指缩放；等轴与六视图、复位</li>
+          <li>三维工具：测距、透视、爆炸、剖切、环境、截图、网格、模型信息</li>
+          <li>二维工具：适配、平移、测距、图层、截图</li>
+          <li>深色 / 浅色主题；安装后可离线查看</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>安装说明</h2>
+        <p>1. 点击下方按钮下载 APK（约 15MB）。</p>
+        <p>2. 用安卓手机打开安装包；若提示「未知来源」，在系统设置中允许安装。</p>
+        <p>3. 安装完成后，从本机文件管理器选择图纸即可查看。</p>
+        <div class="actions">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/qazsyk/rui-su-drawing-viewer/releases/download/v0.1.0/ruisu-drawing-viewer-0.1.0.apk"
+          >下载安卓 APK</a>
+          <a
+            class="btn btn-ghost"
+            href="https://github.com/qazsyk/rui-su-drawing-viewer/releases/tag/v0.1.0"
+            target="_blank"
+            rel="noopener noreferrer"
+          >查看 Release 说明</a>
+        </div>
+        <p class="meta">当前为内部调试包（debug）。仅供安卓设备安装。</p>
+        <div class="url">https://github.com/qazsyk/rui-su-drawing-viewer/releases/download/v0.1.0/ruisu-drawing-viewer-0.1.0.apk</div>
+      </section>
+    </div>
+  </body>
+</html>
